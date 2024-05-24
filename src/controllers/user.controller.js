@@ -426,6 +426,7 @@ const getWatchHistory = asyncHandler(async(req, res)=>
             "watch History fetched successfully"
             ))
 })
+
 export {
     registerUser,
     loginUser,
