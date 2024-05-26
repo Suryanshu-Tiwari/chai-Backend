@@ -1,44 +1,51 @@
-import mongoose, {Schema} from "mongoose";
+import { Schema, model } from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
+
 const videoSchema = new Schema(
     {
-        videoFile:{
-            type:String, //cloudinary
-            required: true
+        videoFile: {
+            type: {
+                url: String,
+                public_id: String,
+            },
+            required: true,
         },
-        thumbnail:{
-            type:String,
-            required: true
+        thumbnail: {
+            type: {
+                url: String,
+                public_id: String,
+            },
+            required: true,
         },
-        title:{
-            type:String,
-            required: true
-        },
-        description:{
-            type:String,
-            required: true
-        },
-        duration:{
-            type:Number, //cloudinary
-            required: true
-        },
-        views:{
-            type:Number, //cloudinary
-            default: 0
-        },
-        isPublished:{
-            type: Boolean,
-            default: true
-        },
-        owner:{
+        owner: {
             type: Schema.Types.ObjectId,
-            ref: "User"
-        }
+            ref: "User",
+        },
+        title: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        duration: {
+            type: Number,
+            required: true,
+        },
+        views: {
+            type: Number,
+            defaultValue: 0,
+        },
+        isPublished: {
+            type: Boolean,
+            defaultValue: false,
+        },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
-)
-videoSchema.plugin(mongooseAggregatePaginate)
+);
 
-export const Video = mongoose.model("Video",videoSchema);
+videoSchema.plugin(mongooseAggregatePaginate);
+export const Video = model("Video", videoSchema);
